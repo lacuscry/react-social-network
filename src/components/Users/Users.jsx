@@ -3,7 +3,7 @@ import classes from './Users.module.css';
 
 
 function Users(props){
-	const userList = props.users.map(user => <User toggleFollowing={props.toggleFollowing} user={user} defaultInfo={props.defaultInfo} key={user.id}/>)
+	const userList = props.users.map(user => <User toggleFollowing={props.toggleFollowing} follow={props.follow} unfollow={props.unfollow} user={user} defaultInfo={props.defaultInfo} key={user.id}/>)
 
 	const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 	

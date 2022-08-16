@@ -1,22 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setUsers, setTotalUsersCount, toggleFollowing, changeSelectedPage, toggleIsFetching} from '../../Redux/users-reducer';
-import * as axios from 'axios';
+import {setUsers, setTotalUsersCount, toggleFollowingUser, changeSelectedPage, toggleIsFetching} from '../../Redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import {userAPI} from '../../api/api';
 
 
 class UsersContainer extends React.Component{
 	componentDidMount(){
 		this.props.toggleIsFetching(true);
 
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`).then(response => {
-			
+		userAPI.getUsers(this.props.selectedPage, this.props.pageSize).then(data => {
 			this.props.toggleIsFetching(false);
 
-			this.props.setUsers(response.data.items);
+			this.props.setUsers(data.items);
 			
-			this.props.setTotalUsersCount([response.data.totalCount]);
+			this.props.setTotalUsersCount([data.totalCount]);
 		});
 	}
 	
@@ -25,19 +24,35 @@ class UsersContainer extends React.Component{
 
 		this.props.toggleIsFetching(true);
 
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+		userAPI.getUsers(page, this.props.pageSize).then(data => {
 			this.props.toggleIsFetching(false);
-
-			this.props.setUsers(response.data.items);
+			
+			this.props.setUsers(data.items);
 		});
 	}
 
-	
+	changeFollowingState = (userId, status) => {
+		if(status){
+			userAPI.deleteFollowUser(userId).then(data => {
+				if (data.resultCode === 0){
+					this.props.toggleFollowingUser(userId, status);
+				}
+			});
+		} else {
+			userAPI.postFollowUser(userId).then(data => {
+				if (data.resultCode === 0){
+					this.props.toggleFollowingUser(userId, status);
+				}
+			});
+		}
+	}
+
+
 	render(){		
 		return(
 			<>{
 				this.props.isFetching ? <Preloader/> :
-				<Users onChangeSelectedPage={this.onChangeSelectedPage} toggleFollowing={this.props.toggleFollowing} defaultInfo={this.props.defaultInfo} isFetching={this.props.isFetching} totalUsersCount={this.props.totalUsersCount} users={this.props.users} pageSize={this.props.pageSize} selectedPage={this.props.selectedPage}/>
+				<Users toggleFollowing={this.changeFollowingState} onChangeSelectedPage={this.onChangeSelectedPage} defaultInfo={this.props.defaultInfo} isFetching={this.props.isFetching} totalUsersCount={this.props.totalUsersCount} users={this.props.users} pageSize={this.props.pageSize} selectedPage={this.props.selectedPage}/>
 			}</>
 		)
 	}
@@ -56,4 +71,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {setUsers, setTotalUsersCount, toggleFollowing, changeSelectedPage, toggleIsFetching})(UsersContainer);
+export default connect(mapStateToProps, {setUsers, setTotalUsersCount, toggleFollowingUser, changeSelectedPage, toggleIsFetching})(UsersContainer);

@@ -1,7 +1,7 @@
 import userPhoto from '../assets/images/user.jpg';
 
 
-const TOGGLE_FOLLOWING = 'TOGGLE-FOLLOWING';
+const TOOGLE_FOLLOWING_USER = 'TOOGLE-FOLLOWING-USER';
 const SET_USERS = 'SET-USERS';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const CHANGE_SELECTED_PAGE = 'CHANGE-SELECTED-PAGE';
@@ -47,7 +47,7 @@ function usersReducer(state = initialState, action) {
 			};
 		}
 
-		case TOGGLE_FOLLOWING: {
+		case TOOGLE_FOLLOWING_USER: {
 
 			return {
 				...state,
@@ -55,7 +55,7 @@ function usersReducer(state = initialState, action) {
 					if (user.id === action.userId) {
 						return {
 							...user,
-							followed: !action.followed
+							followed: !action.status
 						};
 					} else {
 						return {
@@ -88,10 +88,10 @@ function usersReducer(state = initialState, action) {
 }
 
 
-export const toggleFollowing = (status, id) => ({
-	type: TOGGLE_FOLLOWING,
+export const toggleFollowingUser = (id, status) => ({
+	type: TOOGLE_FOLLOWING_USER,
 	userId: id,
-	followed: status
+	status
 });
 
 export const setUsers = (list) => ({
