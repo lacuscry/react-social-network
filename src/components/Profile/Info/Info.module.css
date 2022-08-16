@@ -1,0 +1,55 @@
+.info_block {
+	display: grid;
+	grid-template-areas:
+		'bg bg bg'
+		'photo info info'
+		'posts posts posts';
+	grid-template-rows: repeat(2, 150px) 1fr;
+	grid-template-columns: minmax(150px, 150px) 1fr;
+	gap: 30px;
+}
+
+.bg {
+	grid-area: bg;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.photo {
+	grid-area: photo;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.info {
+	grid-area: info;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.name {
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.age {
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.city {
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.job {
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5;
+}

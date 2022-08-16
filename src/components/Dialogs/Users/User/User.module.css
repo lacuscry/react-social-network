@@ -1,0 +1,32 @@
+.user {
+	cursor: pointer;
+	padding: 10px 20px;
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	align-items: center;
+	gap: 20px;
+	background: #9460d0;
+	border-radius: 20px;
+	text-decoration: none;
+	transition: all 0.3s ease 0s;
+}
+
+.user:hover {
+	background: #492465;
+}
+
+.user.active {
+	background: #492465;
+}
+
+.user img {
+	height: 50px;
+	width: 100%;
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+}
+
+.name {
+	color: #fff;
+}

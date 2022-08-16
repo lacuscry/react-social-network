@@ -1,0 +1,23 @@
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 40px);
+	justify-content: center;
+	gap: 10px;
+}
+
+.button {
+	cursor: pointer;
+	padding: 10px 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background: #492465;
+	color: #fff;
+	transition: 0.3s;
+}
+
+.selected,
+.button:hover {
+	background: #000;
+}

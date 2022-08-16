@@ -1,0 +1,58 @@
+.messages {
+	padding: 30px;
+	grid-area: dialogs;
+	display: grid;
+	grid-template-rows: 1fr 120px;
+	gap: 30px;
+	background: #492465;
+	border-radius: 20px;
+}
+
+.messages_wrapper {
+	overflow: auto;
+	display: grid;
+	gap: 15px;
+	max-height: 300px;
+	padding-right: 10px;
+}
+
+
+.messages_wrapper::-webkit-scrollbar {
+	width: 5px;
+	background: #000;
+}
+
+.messages_wrapper::-webkit-scrollbar-thumb {
+	background: #9460d0;
+	border-radius: 5px;
+}
+
+
+.form {
+	display: grid;
+	grid-template-columns: 1fr 150px;
+	gap: 30px;
+}
+
+.form textarea {
+	padding: 10px;
+	resize: none;
+	outline: none;
+	border-radius: 5px;
+	font-family: sans-serif;
+}
+
+.form button {
+	align-self: start;
+	cursor: pointer;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background: #000;
+	border: 0;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 16px;
+}

@@ -1,0 +1,14 @@
+.preload {
+	max-width: 1600px;
+	max-height: 1049px;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #7046a0;
+}
+
+.preload img {
+	max-width: 150px;
+}

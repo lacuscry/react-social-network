@@ -1,0 +1,38 @@
+.post {
+	padding: 20px;
+	position: relative;
+	display: grid;
+	gap: 5px;
+	border-radius: 20px;
+	background: #9460d0;
+}
+
+.photo {
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.post p {
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.image {
+	max-width: 300px;
+}
+
+.image:not([src]) {
+	display: none;
+}
+
+.likes {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	color: #fff;
+	font-size: 12px;
+	line-height: 1.5;
+}

@@ -1,0 +1,15 @@
+.message {
+	justify-self: start;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	background: #9460d0;
+	border-radius: 10px;
+	color: #fff;
+}
+
+.message.mine {
+	justify-self: end;
+	background: #000;
+}

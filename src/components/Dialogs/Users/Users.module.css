@@ -1,0 +1,5 @@
+.users {
+	grid-area: users;
+	display: grid;
+	gap: 20px;
+}
