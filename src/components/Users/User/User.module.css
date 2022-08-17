@@ -36,6 +36,10 @@
 	font-size: 14px;
 }
 
+.button[disabled] {
+	background: rgb(43, 43, 43);
+}
+
 .info {
 	width: 100%;
 	display: grid;

@@ -6,6 +6,7 @@ const SET_USERS = 'SET-USERS';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const CHANGE_SELECTED_PAGE = 'CHANGE-SELECTED-PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 
 
 const initialState = {
@@ -25,7 +26,8 @@ const initialState = {
 	pageSize: 5,
 	totalUsersCount: 0,
 	selectedPage: 1,
-	isFetching: false
+	isFetching: false,
+	followingInProgress: null
 };
 
 
@@ -81,6 +83,13 @@ function usersReducer(state = initialState, action) {
 			};
 		}
 
+		case TOGGLE_IS_FOLLOWING_PROGRESS: {
+			return {
+				...state,
+				followingInProgress: action.id,
+			};
+		}
+
 		default:
 
 			return state;
@@ -94,24 +103,29 @@ export const toggleFollowingUser = (id, status) => ({
 	status
 });
 
-export const setUsers = (list) => ({
+export const setUsers = list => ({
 	type: SET_USERS,
 	users: list
 });
 
-export const setTotalUsersCount = (count) => ({
+export const setTotalUsersCount = count => ({
 	type: SET_TOTAL_USERS_COUNT,
 	count
 });
 
-export const changeSelectedPage = (page) => ({
+export const changeSelectedPage = page => ({
 	type: CHANGE_SELECTED_PAGE,
 	selectedPage: page
 });
 
-export const toggleIsFetching = (isFetching) => ({
+export const toggleIsFetching = isFetching => ({
 	type: TOGGLE_IS_FETCHING,
 	isFetching
+});
+
+export const toggleIsFollowingProgress = id => ({
+	type: TOGGLE_IS_FOLLOWING_PROGRESS,
+	id
 });
 
 

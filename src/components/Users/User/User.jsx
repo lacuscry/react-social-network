@@ -7,14 +7,14 @@ function User(props){
 		props.toggleFollowing(id, status); 
 	}
 
-	
+
 	return(
 		<div className={classes.user}>
 			<div className={classes.preview}>
 				<NavLink to={`/profile/${props.user.id}`}>
 					<img className={classes.photo} src={props.user.photos.small ? props.user.photos.small : props.defaultInfo.profilePhoto} alt="Photo"/>
 				</NavLink>
-				<button onClick={() => onChangeFollowing(props.user.followed, props.user.id)} className={classes.button}>
+				<button disabled={props.followingInProgress === props.user.id} onClick={() => onChangeFollowing(props.user.followed, props.user.id)} className={classes.button}>
 					{props.user.followed ? 'Unfollow' : 'Follow'}
 				</button>
 			</div>
