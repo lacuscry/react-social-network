@@ -23,8 +23,16 @@ export const userAPI = {
 		return instance.delete(`follow/${userId}`)
 			.then(response => response.data);
 	},
-	setProfile(userId) {
+	setProfile(userId = 25369) {
 		return instance.get(`/profile/${userId}`)
+			.then(response => response.data);
+	}
+};
+
+
+export const authAPI = {
+	login() {
+		return instance.get(`auth/me`)
 			.then(response => response.data);
 	}
 };

@@ -8,11 +8,7 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 class ProfileContainer extends React.Component{
 	componentDidMount(){
 		let userId = this.props.router.params.userId;
-		
-		if(!userId){
-			userId = 25369;
-		}
-		
+	
 		this.props.getProfileThunk(userId);
 	}
 
