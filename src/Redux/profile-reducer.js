@@ -1,3 +1,8 @@
+import {
+	userAPI
+} from "../api/api";
+
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const SET_PROFILE = 'SET-PROFILE';
@@ -21,13 +26,13 @@ const initialState = {
 			likes: 1
 		}
 	],
-	defaultInfo:{
+	defaultInfo: {
 		fullName: 'Tim Avezov',
 		age: '22 y.o',
 		city: 'Moscow, Russia',
 		job: 'Front-end Developer',
 		bg: 'https://img.freepik.com/free-photo/cryptocurrency-coding-digital-blue-background-open-source-blockchain-concept_53876-124644.jpg?w=2000',
-		photos :{
+		photos: {
 			large: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80',
 			small: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80',
 		}
@@ -88,6 +93,15 @@ export const setProfile = (profile) => ({
 	type: SET_PROFILE,
 	profile
 });
+
+
+export const getProfileThunk = userId => {
+	return dispatch => {
+		userAPI.setProfile(userId).then(data => {
+			dispatch(setProfile(data));
+		});
+	};
+};
 
 
 export default profileReducer;

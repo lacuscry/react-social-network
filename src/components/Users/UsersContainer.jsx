@@ -1,56 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setUsers, setTotalUsersCount, toggleFollowingUser, changeSelectedPage, toggleIsFetching, toggleIsFollowingProgress} from '../../Redux/users-reducer';
+import {getUsersThunk, changePageThunk, changeFollowingStateThunk, toggleIsFollowingProgress} from '../../Redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
-import {userAPI} from '../../api/api';
 
 
 class UsersContainer extends React.Component{
 	componentDidMount(){
-		this.props.toggleIsFetching(true);
-
-		userAPI.getUsers(this.props.selectedPage, this.props.pageSize).then(data => {
-			this.props.toggleIsFetching(false);
-
-			this.props.setUsers(data.items);
-			
-			this.props.setTotalUsersCount([data.totalCount]);
-		});
+		this.props.getUsersThunk(this.props.selectedPage, this.props.pageSize);
 	}
 	
 	onChangeSelectedPage = page => {
-		this.props.changeSelectedPage(page);
-
-		this.props.toggleIsFetching(true);
-
-		userAPI.getUsers(page, this.props.pageSize).then(data => {
-			this.props.toggleIsFetching(false);
-			
-			this.props.setUsers(data.items);
-		});
+		this.props.changePageThunk(page, this.props.pageSize);
 	}
 
 	changeFollowingState = (userId, status) => {
-		this.props.toggleIsFollowingProgress(userId);
-
-		if(status){
-			userAPI.deleteFollowUser(userId).then(data => {
-				if (data.resultCode === 0){
-					this.props.toggleFollowingUser(userId, status);
-
-					this.props.toggleIsFollowingProgress(null);
-				}
-			});
-		} else {
-			userAPI.postFollowUser(userId).then(data => {
-				if (data.resultCode === 0){
-					this.props.toggleFollowingUser(userId, status);
-		
-					this.props.toggleIsFollowingProgress(null);
-				}
-			});
-		}
+		this.props.changeFollowingStateThunk(userId, status);
 	}
 
 
@@ -78,4 +43,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {setUsers, setTotalUsersCount, toggleFollowingUser, changeSelectedPage, toggleIsFetching, toggleIsFollowingProgress})(UsersContainer);
+export default connect(mapStateToProps, {getUsersThunk, changePageThunk, changeFollowingStateThunk, toggleIsFollowingProgress})(UsersContainer);

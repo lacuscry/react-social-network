@@ -1,4 +1,5 @@
 import userPhoto from '../assets/images/user.jpg';
+import {userAPI} from '../api/api';
 
 
 const TOOGLE_FOLLOWING_USER = 'TOOGLE-FOLLOWING-USER';
@@ -127,6 +128,63 @@ export const toggleIsFollowingProgress = id => ({
 	type: TOGGLE_IS_FOLLOWING_PROGRESS,
 	id
 });
+
+
+export const getUsersThunk = (selectedPage, pageSize) => {
+
+	return dispatch => {
+		dispatch(toggleIsFetching(true));
+
+		userAPI.getUsers(selectedPage, pageSize).then(data => {
+			dispatch(toggleIsFetching());
+
+			dispatch(setUsers(data.items));
+
+			dispatch(setTotalUsersCount([data.totalCount]));
+		});
+	};
+};
+
+export const changePageThunk = (page, pageSize) => {
+
+	return dispatch => {
+
+		dispatch(changeSelectedPage(page));
+
+		dispatch(toggleIsFetching(true));
+
+		userAPI.getUsers(page, pageSize).then(data => {
+			dispatch(toggleIsFetching());
+			
+			dispatch(setUsers(data.items));
+		});
+	};
+};
+
+export const changeFollowingStateThunk = (userId, status) => {
+
+	return dispatch => {
+		dispatch(toggleIsFollowingProgress(userId));
+
+		if(status){
+			userAPI.unfollowUser(userId).then(data => {
+				if (data.resultCode === 0){
+					dispatch(toggleFollowingUser(userId, status));
+
+					dispatch(toggleIsFollowingProgress());
+				}
+			});
+		} else {
+			userAPI.followUser(userId).then(data => {
+				if (data.resultCode === 0){
+					dispatch(toggleFollowingUser(userId, status));
+		
+					dispatch(toggleIsFollowingProgress());
+				}
+			});
+		}
+	};
+};
 
 
 export default usersReducer;

@@ -15,12 +15,16 @@ export const userAPI = {
 		return instance.get(`users?page=${selectedPage}&count=${pageSize}`)
 			.then(response => response.data);
 	},
-	postFollowUser(userId) {
+	followUser(userId) {
 		return instance.post(`follow/${userId}`)
 			.then(response => response.data);
 	},
-	deleteFollowUser(userId) {
+	unfollowUser(userId) {
 		return instance.delete(`follow/${userId}`)
+			.then(response => response.data);
+	},
+	setProfile(userId) {
+		return instance.get(`/profile/${userId}`)
 			.then(response => response.data);
 	}
 };
