@@ -4,6 +4,7 @@ import {getUsersThunk, changePageThunk, changeFollowingStateThunk, toggleIsFollo
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import {withAuthRedirect} from '../hoc/withAuthRedirect';
+import {compose} from 'redux';
 
 
 class UsersContainer extends React.Component{
@@ -44,7 +45,7 @@ function mapStateToProps(state){
 }
 
 
-const withRedirect = withAuthRedirect(UsersContainer);
-
-
-export default connect(mapStateToProps, {getUsersThunk, changePageThunk, changeFollowingStateThunk, toggleIsFollowingProgress})(withRedirect);
+export default compose(
+	connect(mapStateToProps, {getUsersThunk, changePageThunk, changeFollowingStateThunk, toggleIsFollowingProgress}),
+	withAuthRedirect
+)(UsersContainer);
