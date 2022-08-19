@@ -3,9 +3,10 @@ import {Routes, Route} from 'react-router-dom';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Footer from './components/Footer/Footer';
+import LoginPage from './components/Login/Login';
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
 				<Routes>
 					<Route path="/profile/" element={<ProfileContainer/>}/>
 					<Route path="/profile/:userId" element={<ProfileContainer/>}/>
-      		        <Route path="/dialogs/*" element={<Dialogs/>}/>
+      		        <Route path="/dialogs/*" element={<DialogsContainer/>}/>
+					<Route path="/login" element={<LoginPage/>}/>
       		        <Route path="/users" element={<UsersContainer/>}/>
 				</Routes>
 			</div>
