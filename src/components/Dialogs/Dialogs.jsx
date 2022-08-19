@@ -1,15 +1,9 @@
 import classes from './Dialogs.module.css';
 import MessagesContainer from './Messages/MessagesContainer';
 import UsersContainer from './Users/UsersContainer';
-import {Navigate} from "react-router-dom";
 
 
 function Dialogs(props){
-	if(!props.isAuth){
-		return <Navigate to={'/login'}/>
-	};
-
-
 	return(
 		<div id='dialogs' className={classes.dialogs}>
 			<div className='container'>
