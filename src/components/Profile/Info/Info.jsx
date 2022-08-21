@@ -1,5 +1,6 @@
 import classes from './Info.module.css';
 import Preloader from '../../common/Preloader/Preloader.jsx';
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 
 function Info(props){
@@ -18,6 +19,7 @@ function Info(props){
 				<div className={classes.city}>{props.profile.city || props.defaultInfo.city}</div>
 				<div className={classes.job}>{props.profile.job || props.defaultInfo.job}</div>
 			</div>
+			<ProfileStatus status={'Status'}/>
 		</div>
 	)
 }
