@@ -1,11 +1,12 @@
 import {
-	userAPI
+	profileAPI
 } from "../api/api";
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const SET_PROFILE = 'SET-PROFILE';
+const SET_STATUS = 'SET-STATUS';
 
 
 const initialState = {
@@ -37,7 +38,8 @@ const initialState = {
 			small: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80',
 		}
 	},
-	profile: null
+	profile: null,
+	status: ''
 };
 
 
@@ -72,6 +74,13 @@ function profileReducer(state = initialState, action) {
 			};
 		}
 
+		case SET_STATUS: {
+			return {
+				...state,
+				status: action.status
+			};
+		}
+
 		default:
 
 			return state;
@@ -79,26 +88,48 @@ function profileReducer(state = initialState, action) {
 }
 
 
-export const addPost = (img) => ({
+export const addPost = img => ({
 	type: ADD_POST,
 	img: img
 });
 
-export const updateNewPost = (text) => ({
+export const updateNewPost = text => ({
 	type: UPDATE_NEW_POST,
 	post: text
 });
 
-export const setProfile = (profile) => ({
+export const setProfile = profile => ({
 	type: SET_PROFILE,
 	profile
 });
 
+export const setStatus = status => ({
+	type: SET_STATUS,
+	status
+});
 
 export const getProfileThunk = userId => {
 	return dispatch => {
-		userAPI.setProfile(userId).then(data => {
+		profileAPI.setProfile(userId).then(data => {
 			dispatch(setProfile(data));
+		});
+	};
+};
+
+export const getStatusThunk = userId => {
+	return dispatch => {
+		profileAPI.getStatus(userId).then(data => {
+			dispatch(setStatus(data));
+		});
+	};
+};
+
+export const updateStatusThunk = status => {
+	return dispatch => {
+		profileAPI.updateStatus(status).then(data => {
+			if (data.resultCode === 0) {
+				dispatch(setStatus(status));
+			}
 		});
 	};
 };

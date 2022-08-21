@@ -19,7 +19,7 @@ function Info(props){
 				<div className={classes.city}>{props.profile.city || props.defaultInfo.city}</div>
 				<div className={classes.job}>{props.profile.job || props.defaultInfo.job}</div>
 			</div>
-			<ProfileStatus status={'Status'}/>
+			<ProfileStatus updateStatusThunk={props.updateStatusThunk} status={props.status}/>
 		</div>
 	)
 }

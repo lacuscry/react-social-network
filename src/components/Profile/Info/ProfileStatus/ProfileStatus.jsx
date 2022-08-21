@@ -5,35 +5,37 @@ import classes from './ProfileStatus.module.css';
 class ProfileStatus extends React.Component{
 	state = {
 		editMode: false,
-		status: window.localStorage.getItem('status')
-	}
+		status: this.props.status
+	};
+
 	
-
-	onChangeStatus(text) {
-		this.setState({
-			status: window.localStorage.setItem('status', text.target.value)
-		});
-	}
-
-	activateEditMode() {
+	activateEditMode = () => {
 		this.setState({
 			editMode: true
 		});
-	}
-
-	deactivateEditMode() {
+	};
+	
+	deactivateEditMode = () => {
 		this.setState({
 			editMode: false
 		});
-	}
+
+		this.props.updateStatusThunk(this.state.status);
+	};
+	
+	onChangeStatus = status => {
+		this.setState({
+			status: status.target.value
+		});
+	};
 	
 
 	render(){
 		return(
 			<div className={classes.status}>
 				{this.state.editMode
-					? <input onBlur={this.deactivateEditMode.bind(this)} onInput={text => this.onChangeStatus(text)} value={this.state.status} className={classes.edit} autoFocus type="text"/>	
-					: <div onDoubleClick={this.activateEditMode.bind(this)} className={classes.result}>{window.localStorage.getItem('status')}</div>	
+					? <input onChange={status => this.onChangeStatus(status)} onBlur={this.deactivateEditMode} value={this.state.status} className={classes.edit} autoFocus/>	
+					: <div onClick={this.activateEditMode} className={classes.result}>{this.props.status || 'No status'}</div>	
 				}
 			</div>
 		)
