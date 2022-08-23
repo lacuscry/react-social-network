@@ -1,13 +1,13 @@
 import classes from './Profile.module.css';
-import Info from './Info/Info';
 import PostsContainer from './Posts/PostsContainer';
+import InfoContainer from './Info/InfoContainer';
 
 
 function Profile(props){
 	return(
 		<main className={classes.profile}>
 			<div className='container'>
-				<Info getStatusThunk={props.getStatusThunk} updateStatusThunk={props.updateStatusThunk} status={props.status} defaultInfo={props.defaultInfo} profile={props.profile}/>
+				<InfoContainer  getStatusThunk={props.getStatusThunk} updateStatusThunk={props.updateStatusThunk}/>
 				<PostsContainer/>
 			</div>
 		</main>

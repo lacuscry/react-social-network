@@ -1,0 +1,24 @@
+.form_control {
+	position: relative;
+}
+
+.form_control.error input,
+.form_control.error textarea {
+	border: 2px solid red;
+}
+
+.form_control.error input::placeholder,
+.form_control.error textarea::placeholder {
+	color: red;
+}
+
+.form_control span {
+	position: absolute;
+	display: none;
+	font-size: 12px;
+}
+
+.form_control.error span {
+	display: block;
+	color: red;
+}

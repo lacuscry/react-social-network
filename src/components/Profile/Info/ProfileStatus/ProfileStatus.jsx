@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './ProfileStatus.module.css';
+import ProfileStatusForm from './ProfileStatusForm/ProfileStatusForm';
 
 
 class ProfileStatus extends React.Component{
@@ -9,7 +9,7 @@ class ProfileStatus extends React.Component{
 	};
 
 
-	componentDidUpdate(prevProps){
+	componentDidUpdate = prevProps => {
 		if(this.props.status !== prevProps.status){
 			this.setState({
 				status: this.props.status
@@ -17,6 +17,7 @@ class ProfileStatus extends React.Component{
 		}
 	}
 	
+
 	activateEditMode = () => {
 		this.setState({
 			editMode: true
@@ -40,12 +41,7 @@ class ProfileStatus extends React.Component{
 
 	render(){
 		return(
-			<div className={classes.status}>
-				{this.state.editMode
-					? <input onChange={status => this.onChangeStatus(status)} onBlur={this.deactivateEditMode} value={this.state.status} className={classes.edit} autoFocus/>	
-					: <div onClick={this.activateEditMode} className={classes.result}>{this.props.status || 'No status'}</div>	
-				}
-			</div>
+			<ProfileStatusForm onSubmit={this.deactivateEditMode} status={this.props.status} state={this.state} activateEditMode={this.activateEditMode} deactivateEditMode={this.deactivateEditMode} onChangeStatus={this.onChangeStatus}/>
 		)
 	}
 }

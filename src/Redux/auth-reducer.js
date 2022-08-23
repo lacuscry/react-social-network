@@ -15,6 +15,7 @@ const initialState = {
 function authReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_USER_DATA: {
+
 			return {
 				...state,
 				...action.data
@@ -40,12 +41,24 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 });
 
 
-export const loginThunk = () => dispatch => {
-	authAPI.login().then(data => {
+export const autoLoginThunk = () => dispatch => {
+	authAPI.autoLogin().then(data => {
 		if(data.resultCode === 0){
 			let {id, email, login} = data.data;
 		
 			dispatch(setAuthUserData(id, email, login, true));
+		}
+	});
+};
+
+export const loginThunk = (formData) => dispatch => {
+	authAPI.login(formData).then(data => {
+		if(data.resultCode === 0){
+			console.log('Logined');
+			// autoLoginThunk(data.data)
+			// dispatch(setAuthUserData(data.data.userId, formData.login, formData.login, true));
+		} else{
+			console.log('Error');
 		}
 	});
 };

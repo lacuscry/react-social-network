@@ -1,6 +1,6 @@
 const CHANGE_CURRENT_DIALOG = 'CHANGE-CURRENT-DIALOG';
 const SEND_MESSAGE = 'SEND-MESSAGE';
-const CHANGE_CURRENT_TEXT_MESSAGE = 'CHANGE-CURRENT-TEXT-MESSAGE';
+
 
 const initialState = {
 	dialogs: [{
@@ -54,9 +54,9 @@ const initialState = {
 			messages: []
 		}
 	],
-	currentDialog: '',
-	currentTextMessage: 'Write a message...',
+	currentDialog: ''
 };
+
 
 function dialogsReducer(state = initialState, action) {
 	switch (action.type) {
@@ -69,9 +69,7 @@ function dialogsReducer(state = initialState, action) {
 		}
 
 		case SEND_MESSAGE: {
-
 			if (state.currentDialog !== '') {
-
 				const stateCopy = JSON.parse(JSON.stringify(state));
 
 				stateCopy.dialogs[stateCopy.currentDialog].messages.push({
@@ -79,20 +77,11 @@ function dialogsReducer(state = initialState, action) {
 					text: action.message
 				});
 
-				stateCopy.currentTextMessage = '';
 
 				return stateCopy;
 			} else {
 				return state;
 			}
-		}
-
-		case CHANGE_CURRENT_TEXT_MESSAGE: {
-
-			return {
-				...state,
-				currentTextMessage: action.text
-			};
 		}
 
 		default:
@@ -101,19 +90,15 @@ function dialogsReducer(state = initialState, action) {
 	}
 }
 
-export const changeCurrentDialog = (id) => ({
+
+export const changeCurrentDialog = id => ({
 	type: CHANGE_CURRENT_DIALOG,
 	id: id
 });
 
-export const sendMessage = (message) => ({
+export const sendMessage = formData => ({
 	type: SEND_MESSAGE,
-	message: message
-});
-
-export const changeCurrentTextMessage = (text) => ({
-	type: CHANGE_CURRENT_TEXT_MESSAGE,
-	text: text
+	message: formData.message
 });
 
 

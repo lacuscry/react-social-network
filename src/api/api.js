@@ -43,8 +43,15 @@ export const profileAPI = {
 };
 
 export const authAPI = {
-	login() {
+	autoLogin() {
 		return instance.get(`auth/me`)
+			.then(response => response.data);
+	},
+	login(formData) {
+		return instance.post(`auth/login`, {
+				email: formData.login,
+				password: formData.password,
+			})
 			.then(response => response.data);
 	}
 };

@@ -1,0 +1,37 @@
+.form {
+	display: grid;
+	gap: 20px;
+}
+
+.row input {
+	padding: 10px;
+	height: 100%;
+	width: 100%;
+	border-radius: 5px;
+	border: 0;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.checkbox input {}
+
+.checkbox label {
+	user-select: none;
+	cursor: pointer;
+	color: #fff;
+	font-size: 16px;
+	line-height: 1.3;
+}
+
+.button {
+	padding: 10px;
+	max-width: 170px;
+	cursor: pointer;
+	background: #000;
+	border-radius: 5px;
+	color: #fff;
+}

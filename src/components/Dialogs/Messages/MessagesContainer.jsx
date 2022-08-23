@@ -1,6 +1,21 @@
 import Messages from './Messages';
-import {sendMessage, changeCurrentTextMessage} from '../../../Redux/dialogs-reducer';
 import {connect} from 'react-redux';
+import React from 'react';
+import {sendMessage} from '../../../Redux/dialogs-reducer';
+
+
+class MessagesContainer extends React.Component{
+	sendMessage = formData => {
+		this.props.sendMessage(formData);
+	}
+
+
+	render() {
+		return(
+			<Messages sendMessage={this.sendMessage} state={this.props.state}/>
+		)
+	};
+}
 
 
 function mapStateToProps(state){
@@ -10,7 +25,4 @@ function mapStateToProps(state){
 }
 
 
-const MessagesContainer = connect(mapStateToProps, {sendMessage, changeCurrentTextMessage})(Messages);
-
-
-export default MessagesContainer;
+export default connect(mapStateToProps, {sendMessage})(MessagesContainer);
