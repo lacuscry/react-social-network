@@ -20,6 +20,7 @@ function LoginForm(props){
 				<Field id='checkbox' component='input' type='checkbox' name='rememberMe' placeholder='Password'/>
 				<label htmlFor='checkbox'>Remember me</label>
 			</div>
+			{props.error ? <div className={classes.summary_error}>{props.error}</div> : null}
 			<button type='submit' className={classes.button}>Log in</button>
 		</form>
 	);

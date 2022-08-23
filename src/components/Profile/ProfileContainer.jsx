@@ -10,7 +10,7 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component{
 	componentDidMount() {
 		let userId = this.props.router.params.userId;
-	
+
 		this.props.getProfileThunk(userId);
 		
 		this.props.getStatusThunk(userId);
@@ -42,8 +42,14 @@ function withRouter(Component) {
 }
 
 
+const mapStateToProps = state => ({
+	isAuth: state.auth.isAuth,
+	authorizedUserId: state.auth.userId
+});
+
+
 export default compose(
-	connect(null, {getProfileThunk, getStatusThunk, updateStatusThunk}),
+	connect(mapStateToProps, {getProfileThunk, getStatusThunk, updateStatusThunk}),
 	// withAuthRedirect,
 	withRouter
 )(ProfileContainer);

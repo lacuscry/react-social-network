@@ -27,6 +27,15 @@
 	line-height: 1.3;
 }
 
+.summary_error {
+	justify-self: start;
+	padding: 5px 10px;
+	border: 1px solid red;
+	border-radius: 5px;
+	color: red;
+	font-size: 16px;
+}
+
 .button {
 	padding: 10px;
 	max-width: 170px;

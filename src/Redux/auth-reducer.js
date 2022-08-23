@@ -1,3 +1,4 @@
+import {stopSubmit} from "redux-form";
 import {authAPI} from "../api/api";
 
 
@@ -50,6 +51,12 @@ export const loginThunk = (email, password, rememberMe) => dispatch => {
 	authAPI.login(email, password, rememberMe).then(data => {
 		if(data.resultCode === 0){
 			dispatch(autoLoginThunk());
+		} else {
+			const messageError = data.messages.length > 0 ? data.messages[0] : 'Some error';
+
+			dispatch(stopSubmit('login', {
+				_error: messageError,
+			}));
 		}
 	});
 };
