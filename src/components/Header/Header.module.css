@@ -25,11 +25,47 @@
 	flex: 1 1 auto;
 }
 
-.login_block a {
+.login_block {
+	display: grid;
+	grid-template-columns: auto 70px;
+	align-items: center;
+	gap: 30px;
+}
+
+.header a {
+	max-height: 32px;
+	max-width: 70px;
+	width: 100%;
+	padding: 7px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+	background: #000;
+	border: 0;
+	border-radius: 5px;
 	color: #fff;
+	font-size: 14px;
 	text-decoration: none;
 }
 
 .login {
 	color: #fff;
+}
+
+.button {
+	max-height: 32px;
+	padding: 7px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+	background: #000;
+	border: 0;
+	border-radius: 5px;
+	font-family: inherit;
+	color: #fff;
+	font-size: 14px;
 }

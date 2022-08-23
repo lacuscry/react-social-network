@@ -32,12 +32,7 @@ function authReducer(state = initialState, action) {
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({
 	type: SET_USER_DATA,
-	data: {
-		userId,
-		email,
-		login,
-		isAuth
-	}
+	data: {userId, email, login, isAuth}
 });
 
 
@@ -51,14 +46,18 @@ export const autoLoginThunk = () => dispatch => {
 	});
 };
 
-export const loginThunk = (formData) => dispatch => {
-	authAPI.login(formData).then(data => {
+export const loginThunk = (email, password, rememberMe) => dispatch => {
+	authAPI.login(email, password, rememberMe).then(data => {
 		if(data.resultCode === 0){
-			console.log('Logined');
-			// autoLoginThunk(data.data)
-			// dispatch(setAuthUserData(data.data.userId, formData.login, formData.login, true));
-		} else{
-			console.log('Error');
+			dispatch(autoLoginThunk());
+		}
+	});
+};
+
+export const logoutThunk = () => dispatch => {
+	authAPI.logout().then(data => {
+		if(data.resultCode === 0){
+			dispatch(setAuthUserData(null, null, null, false));
 		}
 	});
 };

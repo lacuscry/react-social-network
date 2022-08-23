@@ -4,15 +4,21 @@ import {loginThunk} from '../../Redux/auth-reducer';
 import {connect} from 'react-redux';
 import React from 'react';
 import {compose} from 'redux';
+import {Navigate} from 'react-router-dom';
 
 
 class Login extends React.Component{
 	login = formData => {
-		this.props.loginThunk(formData);
+		this.props.loginThunk(formData.email, formData.password, formData.rememberMe);
 	}
 
 
 	render(){
+		if(this.props.isAuth){
+			return <Navigate to='/profile'/>
+		} 
+		
+
 		return(
 			<main className={classes.authorization}>
 				<div className='container'>
@@ -28,7 +34,7 @@ class Login extends React.Component{
 
 
 const mapStateToProps = state => ({
-	auth: state.auth
+	isAuth: state.auth.isAuth
 });
 
 
