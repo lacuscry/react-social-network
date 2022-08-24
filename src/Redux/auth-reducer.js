@@ -38,7 +38,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 
 
 export const autoLoginThunk = () => dispatch => {
-	authAPI.autoLogin().then(data => {
+	return authAPI.autoLogin().then(data => {
 		if(data.resultCode === 0){
 			let {id, email, login} = data.data;
 		

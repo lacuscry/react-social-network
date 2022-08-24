@@ -1,6 +1,6 @@
 import React from "react";
 import {Navigate} from "react-router-dom";
-import {connect} from "react-redux/es/exports";
+import {connect} from 'react-redux';
 
 
 const mapStateToPropsForRedirect = (state) => ({
