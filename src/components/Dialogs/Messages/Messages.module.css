@@ -1,6 +1,7 @@
 .messages {
-	padding: 30px;
 	grid-area: dialogs;
+	position: relative;
+	padding: 30px;
 	display: grid;
 	grid-template-rows: 1fr 120px;
 	gap: 30px;
@@ -8,7 +9,7 @@
 	border-radius: 20px;
 }
 
-.messages_wrapper {
+.messages_wrapper>div {
 	overflow: auto;
 	display: grid;
 	gap: 15px;
@@ -16,13 +17,21 @@
 	padding-right: 10px;
 }
 
-
-.messages_wrapper::-webkit-scrollbar {
+.messages_wrapper>div::-webkit-scrollbar {
 	width: 5px;
 	background: #000;
 }
 
-.messages_wrapper::-webkit-scrollbar-thumb {
+.messages_wrapper>div::-webkit-scrollbar-thumb {
 	background: #9460d0;
 	border-radius: 5px;
+}
+
+.no_messages {
+	opacity: 0.8;
+	position: absolute;
+	left: 50%;
+	top: calc(50% - 50px);
+	transform: translate(-50%, -50%);
+	color: #fff;
 }

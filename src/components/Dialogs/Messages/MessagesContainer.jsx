@@ -10,9 +10,9 @@ class MessagesContainer extends React.Component{
 	}
 
 
-	render() {
+	render(){
 		return(
-			<Messages sendMessage={this.sendMessage} state={this.props.state}/>
+			<Messages sendMessage={this.sendMessage} {...this.props}/>
 		)
 	};
 }
@@ -20,7 +20,8 @@ class MessagesContainer extends React.Component{
 
 function mapStateToProps(state){
 	return{
-		state: state.dialogsPage
+		dialogs: state.dialogsPage.dialogs,
+		currentDialog: state.dialogsPage.currentDialog
 	};
 }
 
