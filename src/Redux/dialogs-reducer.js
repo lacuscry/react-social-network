@@ -9,7 +9,7 @@ const initialState = {
 			img: 'https://i.pinimg.com/564x/f0/17/80/f01780954af2443959496cb6cffda501.jpg',
 			messages: [{
 					whose: 'his',
-					text: 'Hello, Tim. I invite you to dinner on Sunday 5 p.m'
+					text: 'Hello, Tim. I am inviting you to dinner on Sunday 5 p.m'
 				},
 				{
 					whose: 'mine',
@@ -27,11 +27,11 @@ const initialState = {
 			img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNhyXhqZgHyUTgDsGcUevfalYD8xUYm_cSyw&usqp=CAU',
 			messages: [{
 					whose: 'his',
-					text: 'Sup. Have you seen my hammer anywhere?'
+					text: 'Sup. Did you see my hammer anywhere?'
 				},
 				{
 					whose: 'mine',
-					text: 'Hi, no I have not'
+					text: 'Hi. No, I did not'
 				},
 			]
 		},

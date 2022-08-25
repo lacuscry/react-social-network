@@ -21,7 +21,8 @@ class PostsContainer extends React.Component{
 function mapStateToProps(state){
 	return{
 		posts: state.profilePage.posts,
-		photo: state.profilePage.photo
+		photo: state.profilePage.photo,
+		defaultPhoto: state.profilePage.defaultInfo.photos.small
 	};
 }
 

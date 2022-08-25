@@ -1,13 +1,13 @@
 import classes from './Info.module.css';
 import Preloader from '../../common/Preloader/Preloader.jsx';
-import ProfileStatus from './ProfileStatus/ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 
 function Info(props){
 	if(!props.profile){
 		return <Preloader/>
 	}
-	
+
 
 	return(
 		<div className={classes.info_block}>
@@ -19,7 +19,7 @@ function Info(props){
 				<div className={classes.city}>{props.profile.city || props.defaultInfo.city}</div>
 				<div className={classes.job}>{props.profile.job || props.defaultInfo.job}</div>
 			</div>
-			<ProfileStatus updateStatusThunk={props.updateStatusThunk} status={props.status}/>
+			<ProfileStatusWithHooks updateStatusThunk={props.updateStatusThunk} status={props.status}/>
 		</div>
 	)
 }

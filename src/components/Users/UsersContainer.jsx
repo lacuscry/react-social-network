@@ -13,6 +13,7 @@ class UsersContainer extends React.Component{
 		this.props.getUsersThunk(this.props.selectedPage, this.props.pageSize);
 	}
 	
+	
 	onChangeSelectedPage = page => {
 		this.props.changePageThunk(page, this.props.pageSize);
 	}

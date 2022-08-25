@@ -149,7 +149,6 @@ export const getUsersThunk = (selectedPage, pageSize) => {
 export const changePageThunk = (page, pageSize) => {
 
 	return dispatch => {
-
 		dispatch(changeSelectedPage(page));
 
 		dispatch(toggleIsFetching(true));
