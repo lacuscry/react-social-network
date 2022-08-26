@@ -5,12 +5,15 @@ import ProfileStatusForm from './ProfileStatusForm/ProfileStatusForm';
 
 function ProfileStatusWithHooks(props){
 	let [editMode, setEditMode] = useState(false);
+
 	let [status, setStatus] = useState(props.status);
 
-	// useEffect(() => {
-    // 	setStatus(props.status);
-	// },[status]);
+	
+	useEffect(() => {
+    	setStatus(props.status);
+	},[props.status]);
 
+	
 	function activateMode(){
 		setEditMode(true);
 	} 
@@ -27,7 +30,7 @@ function ProfileStatusWithHooks(props){
 	
 
 	return(
-		<ProfileStatusForm onSubmit={deactivateMode} editMode={editMode} storeStatus={props.status} hookStatus={status} activateEditMode={activateMode} deactivateEditMode={deactivateMode} onChangeStatus={changeStatus}/>
+		<ProfileStatusForm editMode={editMode} storeStatus={props.status} hookStatus={status} activateEditMode={activateMode} deactivateEditMode={deactivateMode} onChangeStatus={changeStatus}/>
 	)
 }
 
