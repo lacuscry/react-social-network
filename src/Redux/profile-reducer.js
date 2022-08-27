@@ -2,15 +2,17 @@ import {profileAPI} from "../api/api";
 
 
 const ADD_POST = 'ADD-POST';
+const DELETE_POST = 'DELETE-POST';
 const SET_PROFILE = 'SET-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 
 
 const initialState = {
-	posts: [{
-			text: "It's me",
-			img: 'https://media.istockphoto.com/photos/programmer-working-with-program-code-picture-id1075599562?k=20&m=1075599562&s=612x612&w=0&h=cDFY2kKyhFzSNNlDQsaxoekIW0v7iyaMBkxp11Fz33U=',
-			likes: 10
+	posts: [
+		{
+			text: "Hi everyone",
+			img: null,
+			likes: 1
 		},
 		{
 			text: "I'm tired",
@@ -18,9 +20,9 @@ const initialState = {
 			likes: 5
 		},
 		{
-			text: "Hi everyone",
-			img: null,
-			likes: 1
+			text: "It's me",
+			img: 'https://media.istockphoto.com/photos/programmer-working-with-program-code-picture-id1075599562?k=20&m=1075599562&s=612x612&w=0&h=cDFY2kKyhFzSNNlDQsaxoekIW0v7iyaMBkxp11Fz33U=',
+			likes: 10
 		}
 	],
 	defaultInfo: {
@@ -45,12 +47,23 @@ function profileReducer(state = initialState, action) {
 
 			return {
 				...state,
-				posts: [{
+				posts: [...state.posts,{
 					text: action.text,
 					img: action.img,
 					likes: 0
-				}, ...state.posts],
+				}],
 			};
+		}
+
+		case DELETE_POST: {
+			const newState = {
+				...state,
+				...state.posts,	
+			};
+
+			state.posts.splice(action.postId, 1);
+
+			return newState;
 		}
 
 		case SET_PROFILE: {
@@ -79,6 +92,11 @@ export const addPost = formData => ({
 	type: ADD_POST,
 	text: formData.postText,
 	img: null
+});
+
+export const deletePost = postId => ({
+	type: DELETE_POST,
+	postId
 });
 
 export const setProfile = profile => ({

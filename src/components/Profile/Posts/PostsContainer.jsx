@@ -8,8 +8,8 @@ class PostsContainer extends React.Component{
 	addPost = formData => {
 		this.props.addPost(formData);
 	}
-	
 
+	
 	render(){
 		return(
 			<Posts {...this.props}/>
