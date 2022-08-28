@@ -3,15 +3,15 @@ import {useState, useEffect} from 'react';
 import ProfileStatusForm from './ProfileStatusForm/ProfileStatusForm';
 
 
-function ProfileStatusWithHooks(props){
+function ProfileStatusWithHooks({status, updateStatusThunk}){
 	let [editMode, setEditMode] = useState(false);
 
-	let [status, setStatus] = useState(props.status);
+	let [localStatus, setStatus] = useState(status);
 
 	
 	useEffect(() => {
-    	setStatus(props.status);
-	},[props.status]);
+    	setStatus(status);
+	},[status]);
 
 	
 	function activateMode(){
@@ -21,7 +21,7 @@ function ProfileStatusWithHooks(props){
 	function deactivateMode(){
 		setEditMode(false);
 
-		props.updateStatusThunk(status);
+		updateStatusThunk(localStatus);
 	} 
 
 	function changeStatus(status){
@@ -30,7 +30,7 @@ function ProfileStatusWithHooks(props){
 	
 
 	return(
-		<ProfileStatusForm editMode={editMode} storeStatus={props.status} hookStatus={status} activateEditMode={activateMode} deactivateEditMode={deactivateMode} onChangeStatus={changeStatus}/>
+		<ProfileStatusForm editMode={editMode} storeStatus={status} localStatus={localStatus} activateEditMode={activateMode} deactivateEditMode={deactivateMode} onChangeStatus={changeStatus}/>
 	)
 }
 

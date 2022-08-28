@@ -4,13 +4,13 @@ import Post from './Post/Post';
 import PostForm from './PostForm/PostForm';
 
 
-function Posts(props){
-	const postsList = props.posts.map((post,i) => <Post defaultPhoto={props.defaultPhoto} profilePhoto={props.photo} post={post} key={i}/>);
+function Posts({posts, addPost, defaultPhoto, photo}){
+	const postsList = posts.map((post, i) => <Post defaultPhoto={defaultPhoto} profilePhoto={photo} post={post} key={i}/>);
 
 
 	return(
 		<div className={classes.posts}>
-			<PostForm onSubmit={props.addPost}/>
+			<PostForm onSubmit={addPost}/>
 			<div className={classes.title}>My posts</div>
 			<div className={classes.old_posts}>
 				{postsList}

@@ -3,23 +3,23 @@ import Preloader from '../../common/Preloader/Preloader.jsx';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 
-function Info(props){
-	if(!props.profile){
+function Info({profile, defaultInfo, updateStatusThunk, status}){
+	if(!profile){
 		return <Preloader/>
 	}
 
 
 	return(
 		<div className={classes.info_block}>
-			<img className={classes.bg} src={props.defaultInfo.bg} alt="Image"/>
-			<img className={classes.photo} src={props.profile.photos.large || props.defaultInfo.photos.large} alt="Image"/>
+			<img className={classes.bg} src={defaultInfo.bg} alt="Image"/>
+			<img className={classes.photo} src={profile.photos.large || defaultInfo.photos.large} alt="Image"/>
 			<div className={classes.info}>
-				<div className={classes.name}>{props.profile.fullName || props.defaultInfo.fullName}</div>
-				<div className={classes.age}>{props.profile.age || props.defaultInfo.age}</div>
-				<div className={classes.city}>{props.profile.city || props.defaultInfo.city}</div>
-				<div className={classes.job}>{props.profile.job || props.defaultInfo.job}</div>
+				<div className={classes.name}>{profile.fullName || defaultInfo.fullName}</div>
+				<div className={classes.age}>{profile.age || defaultInfo.age}</div>
+				<div className={classes.city}>{profile.city || defaultInfo.city}</div>
+				<div className={classes.job}>{profile.job || defaultInfo.job}</div>
 			</div>
-			<ProfileStatusWithHooks updateStatusThunk={props.updateStatusThunk} status={props.status}/>
+			<ProfileStatusWithHooks updateStatusThunk={updateStatusThunk} status={status}/>
 		</div>
 	)
 }

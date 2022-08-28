@@ -7,9 +7,9 @@ import {fieldCreator} from '../../../common/FormsControls/FormsControls';
 const maxLength50 = maxLengthThunk(50);
 
 
-function MessageForm(props){
+function MessageForm({handleSubmit}){
 	return(
-		<form onSubmit={props.handleSubmit} className={classes.form}>
+		<form onSubmit={handleSubmit} className={classes.form}>
 			<Field validate={[requiredField, maxLength50]} element='textarea' component={fieldCreator} name='message' placeholder='Enter your message'/>
 			<button>Send</button>
 		</form>

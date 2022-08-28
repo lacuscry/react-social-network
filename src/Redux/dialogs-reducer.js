@@ -1,9 +1,10 @@
-const CHANGE_CURRENT_DIALOG = 'CHANGE-CURRENT-DIALOG';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const CHANGE_CURRENT_DIALOG = 'dialogs/CHANGE-CURRENT-DIALOG';
+const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
 
 
 const initialState = {
-	dialogs: [{
+	dialogs: [
+		{
 			id: 1,
 			name: 'Hannibal Lecter',
 			img: 'https://i.pinimg.com/564x/f0/17/80/f01780954af2443959496cb6cffda501.jpg',

@@ -1,13 +1,13 @@
 import classes from './Post.module.css';
 
 
-function Post(props){
+function Post({post, profilePhoto, defaultPhoto}){
 	return(
 		<div className={classes.post}>
-			<img className={classes.photo} src={props.profilePhoto || props.defaultPhoto} alt="Image"/>
-			<p>{props.post.text}</p>
-			<img className={classes.image} src={props.post.img} alt="Image"/>
-			<div className={classes.likes}>{props.post.likes} likes</div> 
+			<img className={classes.photo} src={profilePhoto || defaultPhoto} alt="Image"/>
+			<p>{post.text}</p>
+			<img className={classes.image} src={post.img} alt="Image"/>
+			<div className={classes.likes}>{post.likes} likes</div> 
 		</div>
 	)	
 }

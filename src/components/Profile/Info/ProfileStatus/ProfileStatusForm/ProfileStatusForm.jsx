@@ -1,12 +1,12 @@
 import classes from './ProfileStatusForm.module.css';
 
 
-function ProfileStatusForm(props){
+function ProfileStatusForm({editMode, onChangeStatus, localStatus, storeStatus, deactivateEditMode, activateEditMode}){
 	return(
 		<form className={classes.status}>
-			{props.editMode
-				? <input onChange={props.onChangeStatus} value={props.hookStatus} onBlur={props.deactivateEditMode} name='status'  className={classes.edit} autoFocus/>	
-				: <div onClick={props.activateEditMode}  className={classes.result}>{props.storeStatus || 'No status'}</div>	
+			{editMode
+				? <input onChange={onChangeStatus} value={localStatus} onBlur={deactivateEditMode} name='status' className={classes.edit} autoFocus/>	
+				: <div onClick={activateEditMode} className={classes.result}>{storeStatus || 'No status'}</div>	
 			}
 		</form>
 	)

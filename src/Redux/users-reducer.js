@@ -1,15 +1,13 @@
 import userPhoto from '../assets/images/user.jpg';
-import {
-	userAPI
-} from '../api/api';
+import {userAPI} from '../api/api';
 
 
-const TOOGLE_FOLLOWING_USER = 'TOOGLE-FOLLOWING-USER';
-const SET_USERS = 'SET-USERS';
-const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
-const CHANGE_SELECTED_PAGE = 'CHANGE-SELECTED-PAGE';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
+const TOOGLE_FOLLOWING_USER = 'users/TOOGLE-FOLLOWING-USER';
+const SET_USERS = 'users/SET-USERS';
+const SET_TOTAL_USERS_COUNT = 'users/SET-TOTAL-USERS-COUNT';
+const CHANGE_SELECTED_PAGE = 'users/CHANGE-SELECTED-PAGE';
+const TOGGLE_IS_FETCHING = 'users/TOGGLE-IS-FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE-IS-FOLLOWING-PROGRESS';
 
 
 const initialState = {
@@ -132,58 +130,50 @@ export const toggleIsFollowingProgress = id => ({
 });
 
 
-export const getUsersThunk = (selectedPage, pageSize) => {
-	return dispatch => {
-		dispatch(toggleIsFetching(true));
+export const getUsersThunk = (selectedPage, pageSize) => async dispatch => {
+	dispatch(toggleIsFetching(true));
 
-		userAPI.getUsers(selectedPage, pageSize).then(data => {
-			dispatch(toggleIsFetching());
-
-			dispatch(setUsers(data.items));
-
-			dispatch(setTotalUsersCount([data.totalCount]));
-		});
-	};
+	const response = await userAPI.getUsers(selectedPage, pageSize);
+	
+	dispatch(toggleIsFetching());
+	
+	dispatch(setUsers(response.data.items));
+	
+	dispatch(setTotalUsersCount([response.data.totalCount]));
 };
 
-export const changePageThunk = (page, pageSize) => {
+export const changePageThunk = (page, pageSize) => async dispatch => {
+	dispatch(changeSelectedPage(page));
 
-	return dispatch => {
-		dispatch(changeSelectedPage(page));
+	dispatch(toggleIsFetching(true));
 
-		dispatch(toggleIsFetching(true));
+	const response = await userAPI.getUsers(page, pageSize);
 
-		userAPI.getUsers(page, pageSize).then(data => {
-			dispatch(toggleIsFetching());
-
-			dispatch(setUsers(data.items));
-		});
-	};
+	dispatch(toggleIsFetching());
+	
+	dispatch(setUsers(response.data.items));
 };
 
-export const changeFollowingStateThunk = (userId, status) => {
+export const changeFollowingStateThunk = (userId, status) => async dispatch => {
+	dispatch(toggleIsFollowingProgress(userId));
 
-	return dispatch => {
-		dispatch(toggleIsFollowingProgress(userId));
-
-		if (status) {
-			userAPI.unfollowUser(userId).then(data => {
-				if (data.resultCode === 0) {
-					dispatch(toggleFollowingUser(userId, status));
-
-					dispatch(toggleIsFollowingProgress());
-				}
-			});
-		} else {
-			userAPI.followUser(userId).then(data => {
-				if (data.resultCode === 0) {
-					dispatch(toggleFollowingUser(userId, status));
-
-					dispatch(toggleIsFollowingProgress());
-				}
-			});
+	if (status) {
+		const response = await userAPI.unfollowUser(userId);
+		
+		if (response.data.resultCode === 0) {
+			dispatch(toggleFollowingUser(userId, status));
+		
+			dispatch(toggleIsFollowingProgress());
 		}
-	};
+	} else {
+		const response = await userAPI.followUser(userId);
+
+		if (response.data.resultCode === 0) {
+			dispatch(toggleFollowingUser(userId, status));
+			
+			dispatch(toggleIsFollowingProgress());
+		}
+	}
 };
 
 

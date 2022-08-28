@@ -1,10 +1,10 @@
 import {profileAPI} from "../api/api";
 
 
-const ADD_POST = 'ADD-POST';
-const DELETE_POST = 'DELETE-POST';
-const SET_PROFILE = 'SET-PROFILE';
-const SET_STATUS = 'SET-STATUS';
+const ADD_POST = 'profile/ADD-POST';
+const DELETE_POST = 'profile/DELETE-POST';
+const SET_PROFILE = 'profile/SET-PROFILE';
+const SET_STATUS = 'profile/SET-STATUS';
 
 
 const initialState = {
@@ -110,30 +110,24 @@ export const setStatus = status => ({
 });
 
 
-export const getProfileThunk = userId => {
-	return dispatch => {
-		profileAPI.setProfile(userId).then(data => {
-			dispatch(setProfile(data));
-		});
-	};
+export const getProfileThunk = userId => async dispatch => {
+	const response = await profileAPI.setProfile(userId);
+
+	dispatch(setProfile(response.data));
 };
 
-export const getStatusThunk = userId => {
-	return dispatch => {
-		profileAPI.getStatus(userId).then(data => {
-			dispatch(setStatus(data));
-		});
-	};
+export const getStatusThunk = userId => async dispatch => {
+	const response = await profileAPI.getStatus(userId);
+	
+	dispatch(setStatus(response.data));
 };
 
-export const updateStatusThunk = status => {
-	return dispatch => {
-		profileAPI.updateStatus(status).then(data => {
-			if (data.resultCode === 0) {
-				dispatch(setStatus(status));
-			}
-		});
-	};
+export const updateStatusThunk = status => async dispatch => {
+	const response = await profileAPI.updateStatus(status);
+	
+	if (response.data.resultCode === 0) {
+		dispatch(setStatus(status));
+	}
 };
 
 

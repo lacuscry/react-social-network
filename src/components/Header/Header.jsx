@@ -2,7 +2,7 @@ import classes from './Header.module.css';
 import {NavLink} from 'react-router-dom';
 
 
-function Header(props){
+function Header({isAuth, login, logout}){
 	return(
 		<header className={classes.header}>
 			<div className={classes.container}>
@@ -14,11 +14,11 @@ function Header(props){
 					</g>
 				</svg>
 				<div className={classes.name}>React Social Network</div>
-				{!props.isAuth 
+				{!isAuth 
 					? <NavLink to={"/login"}>Login</NavLink> 
 					: <div className={classes.login_block}>
-						<div className={classes.login}>{props.login}</div>
-						<button className={classes.button} onClick={props.logout}>Logout</button>
+						<div className={classes.login}>{login}</div>
+						<button className={classes.button} onClick={logout}>Logout</button>
 					</div>
 				}
 			</div>

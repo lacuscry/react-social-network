@@ -3,7 +3,7 @@ import MessagesContainer from './Messages/MessagesContainer';
 import UsersContainer from './Users/UsersContainer';
 
 
-function Dialogs(props){
+function Dialogs(){
 	return(
 		<div id='dialogs' className={classes.dialogs}>
 			<div className='container'>

@@ -2,7 +2,7 @@ import {stopSubmit} from "redux-form";
 import {authAPI} from "../api/api";
 
 
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_DATA = 'auth/SET-USER-DATA';
 
 
 const initialState = {
@@ -37,36 +37,35 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 });
 
 
-export const autoLoginThunk = () => dispatch => {
-	return authAPI.autoLogin().then(data => {
-		if(data.resultCode === 0){
-			let {id, email, login} = data.data;
-		
-			dispatch(setAuthUserData(id, email, login, true));
-		}
-	});
+export const autoLoginThunk = () => async dispatch => {
+	const response = await authAPI.autoLogin();
+	
+	if (response.data.resultCode === 0) {
+		let {id, email, login} = response.data.data;
+	
+		dispatch(setAuthUserData(id, email, login, true));
+	}
 };
 
-export const loginThunk = (email, password, rememberMe) => dispatch => {
-	authAPI.login(email, password, rememberMe).then(data => {
-		if(data.resultCode === 0){
-			dispatch(autoLoginThunk());
-		} else {
-			const messageError = data.messages.length > 0 ? data.messages[0] : 'Some error';
+export const loginThunk = (email, password, rememberMe) => async dispatch => {
+	const response = await authAPI.login(email, password, rememberMe);
 
-			dispatch(stopSubmit('login', {
-				_error: messageError,
-			}));
-		}
-	});
+	if(response.data.resultCode === 0){
+		dispatch(autoLoginThunk());
+	} else {
+		const messageError = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+		dispatch(stopSubmit('login', {
+			_error: messageError,
+		}));
+	}
 };
 
-export const logoutThunk = () => dispatch => {
-	authAPI.logout().then(data => {
-		if(data.resultCode === 0){
-			dispatch(setAuthUserData(null, null, null, false));
-		}
-	});
+export const logoutThunk = () => async dispatch => {
+	const response = authAPI.logout();
+
+	if(response.data.resultCode === 0){
+		dispatch(setAuthUserData(null, null, null, false));
+	}
 };
 
 
