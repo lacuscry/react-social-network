@@ -41,7 +41,7 @@ class ProfileStatus extends React.Component{
 
 	render(){
 		return(
-			<ProfileStatusForm onSubmit={this.deactivateEditMode} status={this.props.status} state={this.state} activateEditMode={this.activateEditMode} deactivateEditMode={this.deactivateEditMode} onChangeStatus={this.onChangeStatus}/>
+			<ProfileStatusForm onSubmit={this.deactivateEditMode} storeStatus={this.props.status} localStatus={this.state} activateEditMode={this.activateEditMode} deactivateEditMode={this.deactivateEditMode} onChangeStatus={this.onChangeStatus}/>
 		)
 	}
 }
