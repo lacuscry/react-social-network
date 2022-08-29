@@ -1,11 +1,11 @@
 .buttons {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 40px);
+	display: flex;
 	justify-content: center;
 	gap: 10px;
 }
 
 .button {
+	flex: 0 0 40px;
 	cursor: pointer;
 	padding: 10px 15px;
 	display: flex;
@@ -20,4 +20,16 @@
 .selected,
 .button:hover {
 	background: #000;
+}
+
+.nav {
+	flex: 0 0 80px;
+	background: #000;
+	color: #fff;
+	transition: 0.3s;
+}
+
+.nav:hover {
+	cursor: pointer;
+	background: #9460d0;
 }

@@ -9,7 +9,7 @@ function User({toggleFollowing, user, defaultInfo, followingInProgress}){
 				<NavLink to={`/profile/${user.id}`}>
 					<img className={classes.photo} src={user.photos.small ? user.photos.small : defaultInfo.profilePhoto} alt="Photo"/>
 				</NavLink>
-				<button disabled={followingInProgress === user.id} onClick={() => toggleFollowing(user.followed, user.id)} className={classes.button}>
+				<button disabled={followingInProgress === user.id} onClick={() => toggleFollowing(user.id, user.followed)} className={classes.button}>
 					{user.followed ? 'Unfollow' : 'Follow'}
 				</button>
 			</div>

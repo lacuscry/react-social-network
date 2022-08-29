@@ -25,6 +25,7 @@ const initialState = {
 		}
 	},
 	pageSize: 5,
+	portionSize: 10,
 	totalUsersCount: 0,
 	selectedPage: 1,
 	isFetching: false,
@@ -136,7 +137,7 @@ export const getUsersThunk = (selectedPage, pageSize) => async dispatch => {
 	const response = await userAPI.getUsers(selectedPage, pageSize);
 	
 	dispatch(toggleIsFetching());
-	
+
 	dispatch(setUsers(response.data.items));
 	
 	dispatch(setTotalUsersCount([response.data.totalCount]));
@@ -157,9 +158,12 @@ export const changePageThunk = (page, pageSize) => async dispatch => {
 export const changeFollowingStateThunk = (userId, status) => async dispatch => {
 	dispatch(toggleIsFollowingProgress(userId));
 
+	
 	if (status) {
 		const response = await userAPI.unfollowUser(userId);
 		
+		console.log(response);
+
 		if (response.data.resultCode === 0) {
 			dispatch(toggleFollowingUser(userId, status));
 		
@@ -167,6 +171,7 @@ export const changeFollowingStateThunk = (userId, status) => async dispatch => {
 		}
 	} else {
 		const response = await userAPI.followUser(userId);
+		console.log(response);
 
 		if (response.data.resultCode === 0) {
 			dispatch(toggleFollowingUser(userId, status));
