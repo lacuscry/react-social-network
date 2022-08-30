@@ -7,14 +7,18 @@ function Paginator({totalItemsCount, pageSize, portionSize, onChangeSelectedPage
 	
 	const pages = [];
 	
+	const portionCount = Math.ceil(pagesCount / portionSize);
+	
+	const [portionNumber, setPortionNumber] = useState(1);
+	
+	const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
+	
+	const rightPortionPageNumber = portionNumber * portionSize;
+	
+	
 	for (let i = 1; i <= pagesCount; i++) {
 		pages.push(i);
 	}
-
-	const portionCount = Math.ceil(pagesCount / portionSize);
-	const [portionNumber, setPortionNumber] = useState(1);
-	const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
-	const rightPortionPageNumber = portionNumber * portionSize;
 
 
 	useEffect(() => setPortionNumber(Math.ceil(selectedPage / portionSize)), [selectedPage]);
