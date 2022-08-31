@@ -1,5 +1,7 @@
 import userPhoto from '../assets/images/user.jpg';
-import {userAPI} from '../api/api';
+import {
+	userAPI
+} from '../api/api';
 
 
 const TOOGLE_FOLLOWING_USER = 'users/TOOGLE-FOLLOWING-USER';
@@ -135,11 +137,11 @@ export const getUsersThunk = (selectedPage, pageSize) => async dispatch => {
 	dispatch(toggleIsFetching(true));
 
 	const response = await userAPI.getUsers(selectedPage, pageSize);
-	
+
 	dispatch(toggleIsFetching());
 
 	dispatch(setUsers(response.data.items));
-	
+
 	dispatch(setTotalUsersCount([response.data.totalCount]));
 };
 
@@ -151,31 +153,28 @@ export const changePageThunk = (page, pageSize) => async dispatch => {
 	const response = await userAPI.getUsers(page, pageSize);
 
 	dispatch(toggleIsFetching());
-	
+
 	dispatch(setUsers(response.data.items));
 };
 
 export const changeFollowingStateThunk = (userId, status) => async dispatch => {
 	dispatch(toggleIsFollowingProgress(userId));
 
-	
+
 	if (status) {
 		const response = await userAPI.unfollowUser(userId);
-		
-		console.log(response);
 
 		if (response.data.resultCode === 0) {
 			dispatch(toggleFollowingUser(userId, status));
-		
+
 			dispatch(toggleIsFollowingProgress());
 		}
 	} else {
 		const response = await userAPI.followUser(userId);
-		console.log(response);
 
 		if (response.data.resultCode === 0) {
 			dispatch(toggleFollowingUser(userId, status));
-			
+
 			dispatch(toggleIsFollowingProgress());
 		}
 	}
