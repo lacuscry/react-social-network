@@ -3,7 +3,7 @@ import React, {Suspense} from 'react';
 import {connect, Provider} from 'react-redux';
 import store from './Redux/redux-store';
 import {compose} from 'redux';
-import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import {Routes, Route, HashRouter} from 'react-router-dom';
 import {initializeApp} from './Redux/app-reducer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Nav from './components/Nav/Nav';
@@ -66,11 +66,11 @@ const AppContainer = compose(
 const MainApp = () => {
 	return(	
 		<React.StrictMode>
-			<BrowserRouter basename={process.env.PUBLIC_URL}>
+			<HashRouter>
 				<Provider store={store}>
 					<AppContainer/>
 				</Provider>
-			</BrowserRouter> 
+			</HashRouter> 
 		</React.StrictMode>
 	)
 }
