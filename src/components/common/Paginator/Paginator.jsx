@@ -29,7 +29,7 @@ function Paginator({totalItemsCount, pageSize, portionSize, onChangeSelectedPage
 			{portionNumber > 1 && <button onClick={() => setPortionNumber(portionNumber - 1)} className={classes.nav}>Prev</button>}
 			{pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
 			.map(page => <button onClick={() => onChangeSelectedPage(page)} className={selectedPage === page ? `${classes.selected} ${classes.button}` : classes.button} key={page}>{page}</button>)}
-			{portionCount > portionNumber && <button onClick={() => setPortionNumber(portionNumber + 1)} className={classes.nav}>Prev</button>}
+			{portionCount > portionNumber && <button onClick={() => setPortionNumber(portionNumber + 1)} className={classes.nav}>Next</button>}
 		</div>
 	);
 }

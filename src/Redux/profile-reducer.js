@@ -5,6 +5,7 @@ const ADD_POST = 'profile/ADD-POST';
 const DELETE_POST = 'profile/DELETE-POST';
 const SET_PROFILE = 'profile/SET-PROFILE';
 const SET_STATUS = 'profile/SET-STATUS';
+const SET_PHOTO = 'profile/SET-PHOTO';
 
 
 const initialState = {
@@ -80,6 +81,13 @@ function profileReducer(state = initialState, action) {
 				status: action.status
 			};
 		}
+	
+		case SET_PHOTO: {
+			return {
+				...state,
+				profile:{...state.profile, photos: action.photos}
+			};
+		}
 
 		default:
 
@@ -109,6 +117,11 @@ export const setStatus = status => ({
 	status
 });
 
+export const setPhoto = photos => ({
+	type: SET_PHOTO,
+	photos
+});
+
 
 export const getProfileThunk = userId => async dispatch => {
 	const response = await profileAPI.setProfile(userId);
@@ -127,6 +140,14 @@ export const updateStatusThunk = status => async dispatch => {
 	
 	if (response.data.resultCode === 0) {
 		dispatch(setStatus(status));
+	}
+};
+
+export const savePhotoThunk = photo => async dispatch => {
+	const response = await profileAPI.updatePhoto(photo);
+
+	if (response.data.resultCode === 0) {
+		dispatch(setPhoto(response.data.data.photos));
 	}
 };
 

@@ -16,11 +16,47 @@
 	object-fit: cover;
 }
 
-.photo {
+.profilePhoto {
+	overflow: hidden;
+	position: relative;
 	grid-area: photo;
+}
+
+.photo {
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
+}
+
+.input {
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	width: 0;
+	height: 0;
+}
+
+.label {
+	position: absolute;
+	left: 50%;
+	top: 80%;
+	transform: translate(-50%, 0);
+	width: 152px;
+	height: 30px;
+	cursor: pointer;
+	background: #000;
+	text-align: center;
+	color: #fff;
+	line-height: 1.5;
+	transition: 0.3s;
+}
+
+.label:hover {
+	background: #492465;
+}
+
+.label_hide {
+	top: 100%;
 }
 
 .info {
